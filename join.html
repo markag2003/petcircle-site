@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You're invited to Pet Circle</title>
+<meta name="description" content="Someone invited you to help look after their pet on Pet Circle. Tap to open the invite.">
+<meta name="theme-color" content="#7B5CD6"><link rel="icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pet Circle">
+<meta property="og:title" content="You're invited to Pet Circle">
+<meta property="og:description" content="Join the chat, see walks and meds, and help look after the pets. Tap to open the invite.">
+<meta property="og:image" content="https://markag2003.github.io/petcircle-site/assets/icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<style>
+ .invite{max-width:440px;margin:40px auto;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 10px 40px rgba(60,40,110,.12)}
+ .invite .head{background:#C9B8F2;padding:30px 24px;text-align:center}
+ .invite .head img{width:76px;height:76px;border-radius:20px}
+ .invite .head h1{font-size:28px;margin:12px 0 4px}
+ .invite .head p{margin:0;font-weight:700;color:#4A3B78}
+ .invite .body{padding:22px 24px 28px}
+ .invite .code{font-size:26px;font-weight:800;letter-spacing:3px;text-align:center;background:#F1EBFC;border-radius:16px;padding:14px;margin:14px 0}
+ .invite .btn{display:block;text-align:center;margin-top:10px}
+ .invite small{display:block;color:#5D5675;text-align:center;margin-top:14px;line-height:1.5}
+</style></head><body>
+<header class="top"><div class="wrap bar"><a class="brand" href="index.html"><img src="assets/icon.png" alt="">Pet Circle</a></div></header>
+<main><div class="wrap">
+ <div class="invite">
+  <div class="head"><img src="assets/icon.png" alt=""><h1>You're invited</h1><p>to help look after a pet on Pet Circle</p></div>
+  <div class="body">
+   <p style="margin:0">Open the invite in the Pet Circle app to see who invited you and join in one tap.</p>
+   <a class="btn" id="open" href="#">Open in Pet Circle</a>
+   <div id="codebox" hidden>
+    <small>Or open Pet Circle, go to Chat, tap + and enter this code:</small>
+    <div class="code" id="code"></div>
+   </div>
+   <small>Don't have the app yet? Pet Circle is coming to the App Store soon. Ask the person who invited you for a test invite, then come back to this link.</small>
+  </div>
+ </div>
+</div></main>
+<script>
+ (function () {
+  var q = new URLSearchParams(location.search);
+  var raw = (q.get("c") || location.hash.slice(1) || "").replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+  var open = document.getElementById("open");
+  if (!raw) { open.textContent = "Open Pet Circle"; open.href = "petcircle://"; return; }
+  var app = "petcircle://join/" + raw;
+  open.href = app;
+  document.getElementById("code").textContent = raw.slice(0, 4) + "-" + raw.slice(4);
+  document.getElementById("codebox").hidden = false;
+  // Try the app straight away; if it isn't installed the page simply stays put
+  setTimeout(function () { location.href = app; }, 300);
+ })();
+</script>
+</body></html>
